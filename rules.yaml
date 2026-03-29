@@ -1,0 +1,36 @@
+rules:
+  - rule_id: banned_tool_shell
+    description: Disallows shell access unless explicitly allowed
+    severity: critical
+    pattern:
+      field: tools
+      contains: shell
+    suggestion: Remove shell tool or add explicit approval workflow.
+  - rule_id: banned_tool_code_exec
+    description: Disallows arbitrary code execution
+    severity: critical
+    pattern:
+      field: tools
+      contains: execute_code
+    suggestion: Avoid execute_code; use safer subprocess with allowlist.
+  - rule_id: missing_name
+    description: Agent must have a name
+    severity: high
+    pattern:
+      field: name
+      value: null
+    suggestion: Set a descriptive name.
+  - rule_id: too_many_tools
+    description: Limit number of tools to avoid complexity
+    severity: medium
+    pattern:
+      field: tools
+    # custom check below: count > 20 not implemented here (would need separate logic)
+    suggestion: "Reduce tools to <20 or split into multiple agents."
+  - rule_id: file_write_requires_approval
+    description: File write operations should require human approval
+    severity: high
+    pattern:
+      field: tools
+      contains: file_write
+    suggestion: Set require_approval: true for file_write permissions.
