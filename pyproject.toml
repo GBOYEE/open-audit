@@ -6,6 +6,10 @@ build-backend = "hatchling.build"
 name = "openaudit"
 version = "0.1.0"
 description = "Security & bias auditor for AI agents"
+authors = [{name = "Oyebanji Adegboyega", email = "oyebanjiadegboyega@gmail.com"}]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
 dependencies = [
     "pyyaml>=6.0",
     "pydantic>=2.0",
@@ -13,10 +17,21 @@ dependencies = [
     "jinja2>=3.0",
     "click>=8.0",
     "pytest>=7.0",
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.27",
 ]
 
 [project.scripts]
 openaudit = "openaudit.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.0",
+    "flake8>=7.0",
+    "mypy>=1.0",
+    "isort>=5.13",
+    "pytest-cov>=4.0",
+]
 
 [tool.black]
 line-length = 100
